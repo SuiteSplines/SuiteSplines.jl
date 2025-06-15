@@ -63,7 +63,12 @@ struct GeometricMapping{Dim,Codim,Dom,S<:Tuple} <: AbstractMapping{Dim,1,Codim}
     orientation::Int8
     function GeometricMapping(domain, args...; orientation::Int=1)
         @assert isa_domain(domain) "First argument should be a domain type."
+
+        # This does nothing right now:
+        # neither NURBS nor TensorProductBsplines implement that
+        # and the default (see this file, line 56) returns `nothing`
         check_mapping_arguments(args)
+        
         Dim = n_input_args(args...)
         @assert Dim == ndims(domain)
         y = map(process_mapping_input, args)
