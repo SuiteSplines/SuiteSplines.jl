@@ -1,3 +1,29 @@
+export @suitesplines_reexport
+
+"""
+    @suitesplines_reexport(pkgs...)
+
+Convenience macro to reexport submodules of `SuiteSplines`.
+
+- If no arguments are passed, it reexports all submodules in `SuiteSplines.SUITESPLINES_PKGS`.
+- If one or more `Symbol`s are passed (e.g., `UnivariateSplines`), only those specific submodules are reexported.
+
+This macro expands to a block of `@reexport using SuiteSplines.PkgName` statements.
+"""
+macro suitesplines_reexport(pkgs...)
+    if length(pkgs) == 0
+        return Expr(:block, [
+            :( @reexport using SuiteSplines.$(Symbol(pkg)) )
+            for pkg in SuiteSplines.SUITESPLINES_PKGS
+        ]...)
+    else
+        return Expr(:block, [
+            :( @reexport using SuiteSplines.$(pkg) )
+            for pkg in pkgs
+        ]...)
+    end
+end
+
 function bundle_include_mapexpr(expr::Expr)
     MacroTools.postwalk(x ->
         begin
@@ -51,23 +77,4 @@ function bundle_test_include_mapexpr(expr::Expr)
             return x
         end,
     expr)
-end
-
-function project_dependencies(project_toml_path::String)
-    data = TOML.parsefile(project_toml_path)
-    return get(data, "deps", Dict())
-end
-
-function collect_submodule_dependencies()
-    deps = Dict{String,PackageSpec}()
-    for pkg in SUITESPLINES_PKGS
-        toml_path = joinpath("src", "bundle", pkg, "Project.toml")
-        pkg_deps = project_dependencies(toml_path)
-        for (name, uuid) in pkg_deps
-            name in SUITESPLINES_PKGS && continue
-            name in keys(deps) && continue
-            deps[name] = PackageSpec(name=name, uuid=uuid) 
-        end
-    end
-    return deps
 end

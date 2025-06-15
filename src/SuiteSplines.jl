@@ -18,23 +18,9 @@ const SUITESPLINES_PKGS = [
 
 include("base.jl")
 
-if !haskey(ENV, "SUITESPLINES_PREPARE")
-    for pkgname in SUITESPLINES_PKGS
-        path = joinpath(pkgname, "src", "$pkgname.jl")
-        include(bundle_include_mapexpr, path)
-    end
+for pkgname in SUITESPLINES_PKGS
+    path = joinpath(pkgname, "src", "$pkgname.jl")
+    include(bundle_include_mapexpr, path)
 end
-
-#@reexport using .IgaBase
-#@reexport using .SortedSequences
-#@reexport using .CartesianProducts
-#@reexport using .KroneckerProducts
-#@reexport using .AbstractMappings
-#@reexport using .BezierBernsteinMethods
-#@reexport using .UnivariateSplines
-#@reexport using .TensorProductBsplines
-#@reexport using .NURBS
-#@reexport using .IgaFormation
-#@reexport using .ImmersedSplines
 
 end # module SuiteSplines
