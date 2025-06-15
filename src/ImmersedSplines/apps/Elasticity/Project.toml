@@ -1,0 +1,28 @@
+name = "Elasticity"
+uuid = "3ad3b160-b977-4444-ac7b-e2b0bbcdb0f8"
+authors = ["rrhiemstar <rrhiemstar@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+AbstractMappings = "7dac2afd-1bf6-47b8-bc94-9dcdcd19d527"
+Algoim = "0eb9048c-21de-4c7a-bfac-056de1940b74"
+CartesianProducts = "ddfd9c64-15e7-45fc-8e16-950f3835cae5"
+GLMakie = "e9467ef8-e4e7-5192-8a1a-b1aee30e663a"
+IgaBase = "9c103fa8-ae55-49f5-92db-ab77803cf2c4"
+IgaFormation = "3811570c-b24d-4931-9f1c-72ee5a79a1d1"
+ImmersedSplines = "3e3b8edd-9419-4511-a852-83e823fd4317"
+KroneckerProducts = "5766f8de-d509-470a-8420-f491b24ab91b"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
+SortedSequences = "2f2e3dc8-c2cf-4b7f-b456-36845a1cbdbc"
+SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+TensorProductBsplines = "89f2e70f-f704-4f07-9b81-69bdc44074b1"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+UnivariateSplines = "2552f6ce-f0d6-4ba3-bf39-bb338613ee69"
+
+[compat]
+AbstractMappings = ">=0.8.2"
+IgaBase = ">=0.8.1"
+IgaFormation = ">=0.6.4"
+UnivariateSplines = ">=0.13.4"
