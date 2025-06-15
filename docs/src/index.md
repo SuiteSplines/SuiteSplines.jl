@@ -8,6 +8,19 @@ CurrentModule = SuiteSplines
 ```
 
 ```@autodocs
-Modules = [SuiteSplines]
-Order   = [:function, :type]
+Modules = [
+    SuiteSplines,
+    SuiteSplines.IgaBase,
+    SuiteSplines.SortedSequences,
+    SuiteSplines.CartesianProducts,
+    SuiteSplines.KroneckerProducts,
+    SuiteSplines.AbstractMappings,
+    SuiteSplines.BezierBernsteinMethods,
+    SuiteSplines.UnivariateSplines,
+    SuiteSplines.TensorProductBsplines,
+    SuiteSplines.NURBS,
+    SuiteSplines.IgaFormation,
+    SuiteSplines.ImmersedSplines,
+]
+Order   = [:function, :type, :macro]
 ```
