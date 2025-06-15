@@ -1,0 +1,30 @@
+name = "TensorProductBsplines"
+uuid = "89f2e70f-f704-4f07-9b81-69bdc44074b1"
+authors = ["René Hiemstra <rrhiemstar@gmail.com>", "Michał Mika <michal@mika.sh>"]
+version = "0.8.2"
+
+[deps]
+AbstractMappings = "7dac2afd-1bf6-47b8-bc94-9dcdcd19d527"
+CartesianProducts = "ddfd9c64-15e7-45fc-8e16-950f3835cae5"
+IgaBase = "9c103fa8-ae55-49f5-92db-ab77803cf2c4"
+KroneckerProducts = "5766f8de-d509-470a-8420-f491b24ab91b"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+RecipesBase = "3cdcf5f2-1ef4-517c-9805-6587b60abb01"
+SortedSequences = "2f2e3dc8-c2cf-4b7f-b456-36845a1cbdbc"
+UnivariateSplines = "2552f6ce-f0d6-4ba3-bf39-bb338613ee69"
+
+[compat]
+AbstractMappings = "^0.8.1"
+CartesianProducts = "^0.15.0"
+IgaBase = "^0.8.0"
+KroneckerProducts = "^0.13.0"
+SortedSequences = "^0.6.2"
+UnivariateSplines = "^0.14.0"
+
+[extras]
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+SafeTestsets = "1bc83da4-3b8d-516f-aca4-4fe02f6d838f"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test", "SafeTestsets","LinearAlgebra"]
