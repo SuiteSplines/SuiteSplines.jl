@@ -1,6 +1,23 @@
 export @suitesplines_reexport
 
 """
+Vector of package names included in the `SuiteSplines.jl` bundle (without `.jl`).
+"""
+const SUITESPLINES_PKGS = [
+    "IgaBase",
+    "SortedSequences",
+    "CartesianProducts",
+    "KroneckerProducts",
+    "AbstractMappings",
+    "BezierBernsteinMethods",
+    "UnivariateSplines",
+    "TensorProductBsplines",
+    "NURBS",
+    "IgaFormation",
+    "ImmersedSplines",
+]
+
+"""
     @suitesplines_reexport(pkgs...)
 
 Convenience macro to reexport submodules of `SuiteSplines`.

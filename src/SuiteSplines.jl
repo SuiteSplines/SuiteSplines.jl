@@ -2,20 +2,6 @@ module SuiteSplines
 
 using Pkg, TOML, Reexport, MacroTools
 
-const SUITESPLINES_PKGS = [
-    "IgaBase",
-    "SortedSequences",
-    "CartesianProducts",
-    "KroneckerProducts",
-    "AbstractMappings",
-    "BezierBernsteinMethods",
-    "UnivariateSplines",
-    "TensorProductBsplines",
-    "NURBS",
-    "IgaFormation",
-    "ImmersedSplines",
-]
-
 include("base.jl")
 
 for pkgname in SUITESPLINES_PKGS
