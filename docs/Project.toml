@@ -1,0 +1,3 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+SuiteSplines = "c1439797-f1c6-466c-87a0-2eb89882a10c"
