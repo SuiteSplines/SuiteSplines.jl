@@ -1,0 +1,20 @@
+name = "KroneckerProducts"
+uuid = "5766f8de-d509-470a-8420-f491b24ab91b"
+authors = ["René Hiemstra <rrhiemstar@gmail.com>", "Michał Mika <michal@mika.sh>"]
+version = "0.13.0"
+
+[deps]
+IgaBase = "9c103fa8-ae55-49f5-92db-ab77803cf2c4"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+TensorOperations = "6aa20fa7-93e2-5fca-9bc0-fbd0db3c71a2"
+
+[compat]
+IgaBase = "^0.8.0"
+SafeTestsets = "^0.1.0"
+
+[extras]
+SafeTestsets = "1bc83da4-3b8d-516f-aca4-4fe02f6d838f"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test", "SafeTestsets"]
