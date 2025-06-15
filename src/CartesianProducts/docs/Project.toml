@@ -1,0 +1,4 @@
+[deps]
+CartesianProducts = "ddfd9c64-15e7-45fc-8e16-950f3835cae5"
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+IgaBase = "9c103fa8-ae55-49f5-92db-ab77803cf2c4"
