@@ -1,14 +1,16 @@
 export Nurbs, transform_to_projective_space!, Mapping, Boundary
 
-function AbstractMappings.check_mapping_arguments(b::NTuple{Codim,TensorProductBspline}) where Codim
-    cache = b[1].cache
-    space = b[1].space
-    for k in 1:Codim
-        @assert sum(b[k].ders) == 0 "Provide B-spline functions; not their derivatives."
-        @assert b[k].cache === cache "Provide B-splines with a single cache."
-        @assert b[k].space === space "Provide B-splines defined via the same space."
-    end
-end
+# NURBS:
+# This does nothing for NURBS.. why is it here?
+#function AbstractMappings.check_mapping_arguments(b::NTuple{Codim,TensorProductBspline}) where Codim
+#    cache = b[1].cache
+#    space = b[1].space
+#    for k in 1:Codim
+#        @assert sum(b[k].ders) == 0 "Provide B-spline functions; not their derivatives."
+#        @assert b[k].cache === cache "Provide B-splines with a single cache."
+#        @assert b[k].space === space "Provide B-splines defined via the same space."
+#    end
+#end
 
 function AbstractMappings.get_property_imp(::Type{<:NTuple{Codim,Nurbs}}, f::GeometricMapping, s::Symbol) where Codim
     s === :space        && return getproperty(getfield(f, :data)[1], :space)
