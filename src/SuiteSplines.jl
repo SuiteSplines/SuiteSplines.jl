@@ -20,7 +20,8 @@ include("base.jl")
 
 if !haskey(ENV, "SUITESPLINES_PREPARE")
     for pkgname in SUITESPLINES_PKGS
-        include(bundle_include_mapexpr, "$pkgname.jl")
+        path = joinpath(pkgname, "src", "$pkgname.jl")
+        include(bundle_include_mapexpr, path)
     end
 end
 
