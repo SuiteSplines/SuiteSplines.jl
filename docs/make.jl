@@ -16,6 +16,7 @@ makedocs(;
     ),
     pages=[
         "Home" => "index.md",
+        "SpecialSpaces.jl" => "SpecialSpaces.md",
     ],
 )
 

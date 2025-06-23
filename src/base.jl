@@ -15,6 +15,7 @@ const SUITESPLINES_PKGS = [
     "NURBS",
     "IgaFormation",
     "ImmersedSplines",
+    "SpecialSpaces",
 ]
 
 """
