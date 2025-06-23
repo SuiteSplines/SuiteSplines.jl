@@ -1,7 +1,7 @@
 name = "CartesianProducts"
 uuid = "ddfd9c64-15e7-45fc-8e16-950f3835cae5"
 authors = ["René Hiemstra <rrhiemstar@gmail.com>", "Michał Mika <michal@mika.sh>"]
-version = "0.15.0"
+version = "0.15.1"
 
 [deps]
 IgaBase = "9c103fa8-ae55-49f5-92db-ab77803cf2c4"

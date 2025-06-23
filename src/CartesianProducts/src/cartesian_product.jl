@@ -1,4 +1,4 @@
-export ⨱, CartesianProduct, collect!, dimension, dropdims
+export ⨱, CartesianProduct, dropdims
 
 struct CartesianProduct{Dim,T,S<:Tuple} <: AbstractArray{T,Dim}
     data::S
@@ -76,7 +76,7 @@ function Base.collect(X::CartesianProduct)
     return A
 end
 
-@generated function collect!(X::CartesianProduct{Dim,T}, A::AbstractArray{T,Dim}) where {T,Dim}
+@generated function IgaBase.collect!(X::CartesianProduct{Dim,T}, A::AbstractArray{T,Dim}) where {T,Dim}
     quote
         @assert length(X)==length(A)
         @nloops $Dim i A begin
@@ -85,7 +85,7 @@ end
     end
 end
 
-@generated function collect!(X::CartesianProduct{Dim}, A::NTuple{Dim,<:AbstractArray}) where {Dim}
+@generated function IgaBase.collect!(X::CartesianProduct{Dim}, A::NTuple{Dim,<:AbstractArray}) where {Dim}
     quote
         @nexprs $Dim j->(A_j = A[j])
         @nexprs $Dim j->(size(A_j)==size(X))
