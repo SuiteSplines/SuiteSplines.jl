@@ -9,7 +9,7 @@ using SuiteSplines
 
 The core function spaces used in SuiteSplines are [`SplineSpace`](@ref UnivariateSplines.SplineSpace)s and tensor-products thereof.
 
-`SpecialSpaces.jl` introduces convenient interfaces for handling spaces used to represent scalar-, vector-valued and mixed-valued fields and geometric mappings.
+`SpecialSpaces.jl` introduces convenient interfaces for handling spaces used to represent scalar-, vector- and mixed-valued fields and geometric mappings.
 
 ## Domains and partitions
 
@@ -39,7 +39,7 @@ breakpoints in each dimension,
 ## Scalar spline spaces
 
 Given a partition, a tensor-product [`ScalarSplineSpace`](@ref SpecialSpaces.ScalarSplineSpace)
-of degree 4 can be constructed by calling
+of degree 2 can be constructed by calling
 
 ```@example specialspaces
 S = ScalarSplineSpace(2, Δ)
@@ -47,7 +47,7 @@ S = ScalarSplineSpace(2, Δ)
 
 This is equivalent to
 ```@example specialspaces
-SplineSpace(4, Δ.data[1]) ⨷ SplineSpace(2, Δ.data[2])
+SplineSpace(2, Δ.data[1]) ⨷ SplineSpace(2, Δ.data[2])
 ```
 
 In fact, [`ScalarSplineSpace`](@ref SpecialSpaces.ScalarSplineSpace) is just a type
