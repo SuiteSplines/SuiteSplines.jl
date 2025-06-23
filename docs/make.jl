@@ -15,8 +15,9 @@ makedocs(;
         size_threshold=1_000_000, # 1MB
     ),
     pages=[
-        "Home" => "index.md",
+        "About" => "index.md",
         "SpecialSpaces.jl" => "SpecialSpaces.md",
+        "Index" => "api.md",
     ],
 )
 
