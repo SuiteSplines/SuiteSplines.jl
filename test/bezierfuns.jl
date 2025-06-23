@@ -4,6 +4,7 @@ using Test, SafeTestsets
 
     using BezierBernsteinMethods
     import BezierBernsteinMethods: step_decasteljau!
+    using IgaBase
 
     @test grevillepoint((1,2,3)) ≈ [1.0/6.0, 2.0/6.0, 3.0/6.0]
 

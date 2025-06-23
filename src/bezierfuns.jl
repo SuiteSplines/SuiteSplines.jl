@@ -1,4 +1,4 @@
-export dimsplinespace, grevillepoint, bernsteinfuns, bernstein, decasteljau!
+export grevillepoint, bernsteinfuns, bernstein, decasteljau!
 
 import Combinatorics: multinomial
 
@@ -8,7 +8,7 @@ import Combinatorics: multinomial
 Compute the dimension of the Bezier spline space on a simplex of
 degree `p` and numer of vertices `d`.
 """
-@inline dimsplinespace(p::Degree, d::Dimension) = Binomial(p+d-1, d-1)
+@inline IgaBase.dimsplinespace(p::Degree, d::Dimension) = Binomial(p+d-1, d-1)
 
 """
     grevillepoint(X::MultiIndex)
