@@ -1,5 +1,5 @@
 export Simplex, BezierSimplex
-export dimension, b2c, c2b, barycentriccoords, cartesiancoords
+export b2c, c2b, barycentriccoords, cartesiancoords
 export vol, jacobian, barycentricdir
 
 """
@@ -40,7 +40,7 @@ BezierSimplex(P::Degree, D::Dimension) = _beziersimplex(P, Val(D))
 
 Return the dimension of a simplex.
 """
-dimension(::AbstractSimplex{D}) where {D} = D
+IgaBase.dimension(::AbstractSimplex{D}) where {D} = D
 
 """
     b2c(simplex)
