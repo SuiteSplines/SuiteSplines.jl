@@ -1,14 +1,14 @@
 name = "CartesianProducts"
 uuid = "ddfd9c64-15e7-45fc-8e16-950f3835cae5"
 authors = ["René Hiemstra <rrhiemstar@gmail.com>", "Michał Mika <michal@mika.sh>"]
-version = "0.15.1"
+version = "0.15.2"
 
 [deps]
 IgaBase = "9c103fa8-ae55-49f5-92db-ab77803cf2c4"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 
 [compat]
-IgaBase = "^0.8.0"
+IgaBase = "^0.8.0, 0.9"
 SafeTestsets = "^0.1.0"
 
 [extras]
