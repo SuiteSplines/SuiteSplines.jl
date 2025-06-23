@@ -1,7 +1,7 @@
 name = "TensorProductBsplines"
 uuid = "89f2e70f-f704-4f07-9b81-69bdc44074b1"
 authors = ["René Hiemstra <rrhiemstar@gmail.com>", "Michał Mika <michal@mika.sh>"]
-version = "0.8.2"
+version = "0.8.3"
 
 [deps]
 AbstractMappings = "7dac2afd-1bf6-47b8-bc94-9dcdcd19d527"
@@ -16,10 +16,10 @@ UnivariateSplines = "2552f6ce-f0d6-4ba3-bf39-bb338613ee69"
 [compat]
 AbstractMappings = "^0.8.1"
 CartesianProducts = "^0.15.0"
-IgaBase = "^0.8.0"
+IgaBase = "^0.9.0"
 KroneckerProducts = "^0.13.0"
 SortedSequences = "^0.6.2"
-UnivariateSplines = "^0.14.0"
+UnivariateSplines = "^0.15.0"
 
 [extras]
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
