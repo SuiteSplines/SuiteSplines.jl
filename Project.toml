@@ -1,7 +1,7 @@
 name = "ImmersedSplines"
 uuid = "3e3b8edd-9419-4511-a852-83e823fd4317"
 authors = ["René Hiemstra <rrhiemstar@gmail.com>", "Michał Mika <michal@mika.sh>"]
-version = "0.5.0"
+version = "0.5.1"
 
 [deps]
 AbstractMappings = "7dac2afd-1bf6-47b8-bc94-9dcdcd19d527"
@@ -19,13 +19,13 @@ Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 UnivariateSplines = "2552f6ce-f0d6-4ba3-bf39-bb338613ee69"
 
 [compat]
-AbstractMappings = "^0.8.2"
-IgaBase = "^0.8.0"
+AbstractMappings = "^0.8.11"
+IgaBase = "^0.9.0"
 SortedSequences = "^0.6.2"
-UnivariateSplines = "^0.14.0"
-CartesianProducts = "^0.15.0"
-KroneckerProducts = "^0.13.0"
-IgaFormation = "^0.6.5"
+UnivariateSplines = "^0.15.0"
+CartesianProducts = "^0.15.2"
+KroneckerProducts = "^0.13.1"
+IgaFormation = "^0.6.6"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
