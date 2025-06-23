@@ -1,5 +1,5 @@
 # define here any functions that should allow overloading inside
-# the Feather eco-system
+# the SuiteSplines framework
 
 export Degree, Regularity, Dimension
 export collect!, contract, contract!
@@ -8,6 +8,8 @@ export Even, Odd, EvenOrOdd, select_even_or_odd
 export parameterless_typeof
 export unzip, NotImplementedError
 export find_singular_dimension, squeeze
+export dimension, dimsplinespace
+
 
 """
     Degree
@@ -40,6 +42,8 @@ function numbertype end
 function getdata end
 function contract end
 function contract! end
+function dimension end
+function dimsplinespace end
 
 abstract type EvenOrOdd  end
 struct Even <: EvenOrOdd end
