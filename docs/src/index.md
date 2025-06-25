@@ -23,18 +23,6 @@ The `SuiteSplines.jl` package is intended for registration in the General reposi
 The documentation of `SuiteSplines.jl` includes tutorials and example usage for
 each of the core packages. 
 
-## Local registry
-
-The latest versions of the core packages are registered in the
-[SuiteSplinesRegistry](https://github.com/SuiteSplines/SuiteSplinesRegistry).
-
-!!! tip "Use core packages independently"
-    To use the core SuiteSplines packages independently, you can add the SuiteSplines registry to your environment
-
-    ```julia-repl
-    pkg> registry add https://github.com/SuiteSplines/SuiteSplinesRegistry.git
-    ```
-
 ## Reexporting submodules
 
 `SuiteSplines.jl` groups core packages into submodules, such as `SuiteSplines.UnivariateSplines`.
@@ -67,8 +55,20 @@ true
 As indicated by the previous prompt, only the names originally exported by
 a submodule are reexported when calling [`@suitesplines_reexport`](@ref).
 
+## Local registry
+
+The latest versions of core packages are registered in
+[SuiteSplinesRegistry](https://github.com/SuiteSplines/SuiteSplinesRegistry).
+
+!!! tip "Use core packages independently"
+    To use the core SuiteSplines packages independently, you can add SuiteSplines registry to your depot
+
+    ```julia-repl
+    pkg> registry add https://github.com/SuiteSplines/SuiteSplinesRegistry.git
+    ```
+
+
 ## Contributing
 
-If you wish to contribute to SuiteSplines, please do so directly in the
-respective core package. All SuiteSplines packages are listed [here](https://github.com/orgs/SuiteSplines/repositories). For more specialized, comprehensive contributions consider
+If you wish to contribute to SuiteSplines, please do so directly in one of the core packages. All SuiteSplines packages are listed [here](https://github.com/orgs/SuiteSplines/repositories). For more specialized, comprehensive contributions consider
 contributing a new package like `TruncatedHierarchicalBsplines.jl`.
