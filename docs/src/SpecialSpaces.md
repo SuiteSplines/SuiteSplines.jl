@@ -9,20 +9,27 @@ using SuiteSplines
 using SuiteSplines
 @suitesplines_reexport
 ```
+!!! warning "Experimental interface"
+
+    This package implements interfaces which at some point might be integrated
+    in the `IgaBase.jl` package.
+
 # SpecialSpaces.jl
 
 The core function spaces in SuiteSplines are [`SplineSpace`](@ref UnivariateSplines.SplineSpace) and tensor-products thereof.
 
 `SpecialSpaces.jl` introduces convenient interfaces for handling spaces used to represent scalar-, vector- and mixed-valued fields and geometric mappings.
 
-!!! tip "Higher dimensions"
+!!! details "Note on higher dimensions"
 
-    Everything described on this page generalizes to higher dimensions, e.g.
+    Almost everything described on this page generalizes to higher dimensions, e.g.
     ```@repl specialspaces_higherdims
     Ω = Interval(0.0, 2.0) ⨱ Interval(0.0, 4.0) ⨱ Interval(-1.0, 1.0)
     Δ = Partition(Ω, (3, 5, 7));
     S = ScalarSplineSpace(4, Δ)
     ```
+    The only exception are the Raviart-Thomas and Taylor-Hood spaces, which are
+    implemented only in two and three dimensions.
 
 ## Domains and partitions
 
@@ -106,6 +113,7 @@ for k in 1:2
     @show indices(V, k)
 end
 ```
+
 Note here the subtlety of calling `indices(V, k)` instead of `indices(V[k])`.
 The element type of `V` is
 ```@repl specialspaces
@@ -184,6 +192,27 @@ indices(rt, :V, 2)
 ```
 
 Both examples are implemented for dimensions two and three and arbitrary degrees.
+
+### Iterable mixed spline space
+
+If a custom struct defining a mixed spline space is not desired, `SpecialSpaces.jl`
+implements an iterable mixed spline space for general use.
+[`IterableMixedSplineSpace`](@ref SpecialSpaces.IterableMixedSplineSpace)
+can be constructed from a named tuple of scalar and vector spline spaces.
+```@repl specialspaces
+V = VectorSplineSpace(2, Δ)
+Q = ScalarSplineSpace(1, Δ)
+ith = IterableMixedSplineSpace((V=V, Q=Q))
+dimension(ith, :Q)
+dimension(ith, :V)
+```
+The example above reproduces the Taylor–Hood mixed spline space.
+
+In addition to the usual interface for mixed spaces, it is also possible to iterate over
+the spaces collected in the iterable mixed spline space,
+```@repl specialspaces
+map(dimension, ith)
+```
 
 ## Mappings
 `SpecialSpaces.jl` implements convenient constructors for fields and geometric mappings
