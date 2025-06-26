@@ -20,7 +20,6 @@ Modules = [
     SuiteSplines.NURBS,
     SuiteSplines.IgaFormation,
     SuiteSplines.ImmersedSplines,
-    SuiteSplines.SpecialSpaces,
 ]
 Order   = [:function, :type, :macro, :constant]
 ```

@@ -1,6 +1,7 @@
 module BezierBernsteinMethods
 
     using LinearAlgebra, SparseArrays, StaticArrays, Combinatorics
+    using IgaBase
 
     include("bezier_types.jl")
     include("affine_geometry.jl")

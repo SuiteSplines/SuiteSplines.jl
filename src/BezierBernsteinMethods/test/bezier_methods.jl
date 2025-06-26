@@ -3,6 +3,7 @@ using Test, SafeTestsets
 @safetestset "Bezier and Bernstein methods" begin
 
     using BezierBernsteinMethods
+    using IgaBase
 
     @testset "DegreeElevation" begin
         p = 3

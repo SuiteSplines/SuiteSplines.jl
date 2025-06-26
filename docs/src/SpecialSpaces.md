@@ -1,4 +1,0 @@
-```@meta
-CurrentModule = SuiteSplines
-```
-# SpecialSpaces

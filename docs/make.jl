@@ -1,7 +1,7 @@
 using SuiteSplines
 using Documenter
 
-DocMeta.setdocmeta!(SuiteSplines, :DocTestSetup, :(using SuiteSplines); recursive=true)
+DocMeta.setdocmeta!(SuiteSplines, :DocTestSetup, :(using SuiteSplines; @suitesplines_reexport); recursive=true)
 
 makedocs(;
     modules=[SuiteSplines],
@@ -16,7 +16,9 @@ makedocs(;
     ),
     pages=[
         "About" => "index.md",
-        "SpecialSpaces.jl" => "SpecialSpaces.md",
+        "Tutorials" => [
+            "tutorials/SpecialSpaces.md",
+        ],
         "Index" => "api.md",
     ],
 )

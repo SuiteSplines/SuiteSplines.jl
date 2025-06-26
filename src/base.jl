@@ -96,3 +96,7 @@ function bundle_test_include_mapexpr(expr::Expr)
         end,
     expr)
 end
+
+function add_registry()
+    Pkg.Registry.add(RegistrySpec(url = "https://github.com/SuiteSplines/SuiteSplinesRegistry.git"))
+end

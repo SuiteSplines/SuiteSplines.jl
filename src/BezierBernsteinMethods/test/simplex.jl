@@ -3,6 +3,7 @@ using Test, SafeTestsets
 @safetestset "Simplex" begin
 
     using BezierBernsteinMethods
+    using IgaBase
 
     frame = Frame(HPoint(0.0,0.0), HPoint(1.0,0.0), HPoint(1.0,1.0))
     @test frame isa Frame{3}

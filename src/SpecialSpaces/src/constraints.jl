@@ -1,10 +1,17 @@
 """
+    abstract type SplineSpaceConstraints{T}
+
+Concrete spline space constraints container subtype this.
+"""
+abstract type SplineSpaceConstraints{T} end
+
+"""
     struct UnivariateSplineSpaceConstraints{T}
 
-Container for [`SplineSpace`](@ref) constraints, i.e. `cl`, `cr`, `cp`
+Container for [`SplineSpace`](@ref) constraints, i.e. `cleft`, `cright`, `cperiodic`
 vectors in `SplineSpace` constructor stored as `left`, `right`and `periodic` field.
 """
-struct UnivariateSplineSpaceConstraints{T}
+struct UnivariateSplineSpaceConstraints{T} <: SplineSpaceConstraints{T}
     left::Vector{T}
     right::Vector{T}
     periodic::Vector{T}
@@ -28,7 +35,7 @@ Container for [`ScalarSplineSpace`](@ref) constraints.
 Field `data` stores a tuple of [`UnivariateSplineSpaceConstraints`](@ref)
 for each tensor-product dimension of [`ScalarSplineSpace`](@ref).
 """
-struct ScalarSplineSpaceConstraints{Dim,T}
+struct ScalarSplineSpaceConstraints{Dim,T} <: SplineSpaceConstraints{T}
     data::NTuple{Dim,UnivariateSplineSpaceConstraints{T}}
     function ScalarSplineSpaceConstraints{Dim,T}() where {Dim,T<:Integer}
         new{Dim,T}(ntuple(dim -> UnivariateSplineSpaceConstraints{T}(), Dim))
@@ -84,7 +91,7 @@ Container for [`ScalarSplineSpaceConstraints`](@ref).
 Field `data` stores a tuple of [`ScalarSplineSpaceConstraints`](@ref)
 for each component of [`VectorSplineSpace`](@ref).
 """
-struct VectorSplineSpaceConstraints{Dim,Codim,T}
+struct VectorSplineSpaceConstraints{Dim,Codim,T} <: SplineSpaceConstraints{T}
     data::NTuple{Codim,ScalarSplineSpaceConstraints{Dim,T}}
     function VectorSplineSpaceConstraints{Dim,Codim,T}() where {Dim,Codim,T<:Integer}
         new{Dim,Codim,T}(ntuple(codim -> ScalarSplineSpaceConstraints{Dim,T}(), Codim))
@@ -147,34 +154,37 @@ Type alias for `NamedTuple` which serves as a container for mixed space constrai
 const MixedSplineSpaceConstraints = NamedTuple
 
 """
-    left_constraint!(C::ScalarSplineSpaceConstraints; c::Vector{Int}=Int[1], dim::Int)
+    left_constraint!(C::ScalarSplineSpaceConstraints{Dim}; c::Vector{Int}=Int[1], dim::Int) where {Dim}
 
 Push `c` to vector in `left` field of [`UnivariateSplineSpaceConstraints`](@ref)
 stored at index `dim` in [`ScalarSplineSpaceConstraints`](@ref).
 """
-function left_constraint!(C::ScalarSplineSpaceConstraints; c::Vector{Int}=Int[1], dim::Int)
+function left_constraint!(C::ScalarSplineSpaceConstraints{Dim}; c::Vector{Int}=Int[1], dim::Int) where {Dim}
+    @assert dim ≤ Dim
     push!(C[dim].left, c...)
     return C
 end
 
 """
-    right_constraint!(C::ScalarSplineSpaceConstraints; c::Vector{Int}=Int[1], dim::Int)
+    right_constraint!(C::ScalarSplineSpaceConstraints{Dim}; c::Vector{Int}=Int[1], dim::Int) where {Dim}
 
 Push `c` to vector in `right` field of [`UnivariateSplineSpaceConstraints`](@ref)
 stored at index `dim` in [`ScalarSplineSpaceConstraints`](@ref).
 """
-function right_constraint!(C::ScalarSplineSpaceConstraints; c::Vector{Int}=Int[1], dim::Int)
+function right_constraint!(C::ScalarSplineSpaceConstraints{Dim}; c::Vector{Int}=Int[1], dim::Int) where {Dim}
+    @assert dim ≤ Dim
     push!(C[dim].right, c...)
     return C
 end
 
 """
-    periodic_constraint!(C::ScalarSplineSpaceConstraints; c::Vector{Int}, dim::Int)
+    periodic_constraint!(C::ScalarSplineSpaceConstraints{Dim}; c::Vector{Int}, dim::Int) where {Dim}
 
 Push `c` to vector in `periodic` field of [`UnivariateSplineSpaceConstraints`](@ref)
 stored at index `dim` in [`ScalarSplineSpaceConstraints`](@ref).
 """
-function periodic_constraint!(C::ScalarSplineSpaceConstraints; c::Vector{Int}, dim::Int)
+function periodic_constraint!(C::ScalarSplineSpaceConstraints{Dim}; c::Vector{Int}, dim::Int) where {Dim}
+    @assert dim ≤ Dim
     push!(C[dim].periodic, c...)
     return C
 end
@@ -190,3 +200,51 @@ end
 function Base.show(io::IO, ::C) where {Dim,Codim,T<:Integer,C<:VectorSplineSpaceConstraints{Dim,Codim,T}}
     print(io, C)
 end
+
+"""
+    clamped_constraint!(C::ScalarSplineSpaceConstraints, side::Vararg{Symbol,N}) where {N}
+
+Clamp a scalar spline space at `side`, where `side` is one of the boundary labels:
+- `:left`
+- `:right`
+- `:bottom`
+- `:top`
+- `:back`
+- `:front`
+"""
+function clamped_constraint!(C::ScalarSplineSpaceConstraints{Dim}, side::Vararg{Symbol,N}) where {Dim,N}
+    @assert all(check_boundary_label.(Val(Dim), side)) "invalid boundary label"
+    for k in Base.OneTo(N)
+        clamped_constraint!(C, Val(side[k]))
+    end
+end
+clamped_constraint!(C::ScalarSplineSpaceConstraints, ::Val{:left})   = left_constraint!(C; dim=1)
+clamped_constraint!(C::ScalarSplineSpaceConstraints, ::Val{:right})  = right_constraint!(C; dim=1)
+clamped_constraint!(C::ScalarSplineSpaceConstraints, ::Val{:bottom}) = left_constraint!(C; dim=2)
+clamped_constraint!(C::ScalarSplineSpaceConstraints, ::Val{:top})    = right_constraint!(C; dim=2)
+clamped_constraint!(C::ScalarSplineSpaceConstraints, ::Val{:back})   = left_constraint!(C; dim=3)
+clamped_constraint!(C::ScalarSplineSpaceConstraints, ::Val{:front})  = right_constraint!(C; dim=3)
+
+"""
+    clamped_constraint!(C::VectorSplineSpaceConstraints{Dim}, side::Vararg{Symbol,N}; dim=1:Dim) where {Dim,N}
+
+Clamp a vector spline space in dimensions `dim` at `side`, where `side` is one of the boundary labels:
+- `:left`
+- `:right`
+- `:bottom`
+- `:top`
+- `:back`
+- `:front`
+"""
+function clamped_constraint!(C::VectorSplineSpaceConstraints{Dim}, side::Vararg{Symbol,N}; dim=1:Dim) where {Dim,N}
+    @assert all(check_boundary_label.(Val(Dim), side)) "invalid boundary label"
+    for k in Base.OneTo(N)
+        clamped_constraint!(C, Val(side[k]); dim=dim)
+    end
+end
+clamped_constraint!(C::VectorSplineSpaceConstraints{Dim}, ::Val{:left}  ; dim=1:Dim) where {Dim} = map(d -> left_constraint!(C[d] ; dim=1), dim)
+clamped_constraint!(C::VectorSplineSpaceConstraints{Dim}, ::Val{:right} ; dim=1:Dim) where {Dim} = map(d -> right_constraint!(C[d]; dim=1), dim)
+clamped_constraint!(C::VectorSplineSpaceConstraints{Dim}, ::Val{:bottom}; dim=1:Dim) where {Dim} = map(d -> left_constraint!(C[d] ; dim=2), dim)
+clamped_constraint!(C::VectorSplineSpaceConstraints{Dim}, ::Val{:top}   ; dim=1:Dim) where {Dim} = map(d -> right_constraint!(C[d]; dim=2), dim)
+clamped_constraint!(C::VectorSplineSpaceConstraints{Dim}, ::Val{:back}  ; dim=1:Dim) where {Dim} = map(d -> left_constraint!(C[d] ; dim=3), dim)
+clamped_constraint!(C::VectorSplineSpaceConstraints{Dim}, ::Val{:front} ; dim=1:Dim) where {Dim} = map(d -> right_constraint!(C[d]; dim=3), dim)
