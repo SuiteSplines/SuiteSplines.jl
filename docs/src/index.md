@@ -60,13 +60,24 @@ a submodule are reexported when calling [`@suitesplines_reexport`](@ref).
 The latest versions of core packages are registered in
 [SuiteSplinesRegistry](https://github.com/SuiteSplines/SuiteSplinesRegistry).
 
-!!! tip "Use core packages independently"
+!!! tip "Using core packages independently"
     To use the core SuiteSplines packages independently, you can add SuiteSplines registry to your depot
 
     ```julia-repl
-    pkg> registry add https://github.com/SuiteSplines/SuiteSplinesRegistry.git
+    (@v1.10) pkg> registry add https://github.com/SuiteSplines/SuiteSplinesRegistry.git
+    ```
+    This will make all packages in our local registry available in the package manager just like
+    the packages in the General Julia registry. To add `TensorProductBsplines.jl` to the active
+    environment you can call
+    ```julia-repl
+    (@v1.10) pkg> add TensorProductBsplines
     ```
 
+    Alternatively, if you already have `SuiteSplines.jl` added to your environment and prefer not to
+    look up the URL of the local registry, you can simply call
+    ```julia-repl
+    julia> using SuiteSplines; SuiteSplines.add_registry()
+    ```
 
 ## Contributing
 
