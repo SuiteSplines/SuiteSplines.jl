@@ -1,7 +1,7 @@
 name = "SuiteSplines"
 uuid = "c1439797-f1c6-466c-87a0-2eb89882a10c"
 authors = ["Michał Mika <michal@mika.sh>", "Rene Hiemstra <rrhiemstar@gmail.com>"]
-version = "0.3.0"
+version = "0.4.0"
 
 [deps]
 Algoim = "0eb9048c-21de-4c7a-bfac-056de1940b74"
