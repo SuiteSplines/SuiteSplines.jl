@@ -11,8 +11,7 @@ using SuiteSplines
 ```
 !!! warning "Experimental interface"
 
-    This package implements interfaces which at some point might be integrated
-    in the `IgaBase.jl` package.
+    This package implements interfaces that may eventually be integrated into the `IgaBase.jl` package.
 
 # SpecialSpaces.jl
 
@@ -309,6 +308,51 @@ V = VectorSplineSpace(V, C);
 V[1]
 ```
 
+### Mixed spline space constraints
+
+[`MixedSplineSpaceConstraints`](@ref SpecialSpaces.MixedSplineSpaceConstraints)
+is just a type alias for a named tuple.
+
+```@repl specialspaces
+C = MixedSplineSpaceConstraints((V=VectorSplineSpaceConstraints(rt.V), Q=ScalarSplineSpaceConstraints(rt.Q)))
+C.V
+C.Q
+```
+
+### Clamped constraints
+
+For convenience, `SuiteSplines.jl` provides
+[`clamped_constraint!`](@ref SpecialSpaces.clamped_constraint!) for scalar and
+vector spline spaces which can be set on edges/faces of the domain. For example,
+```@repl specialspaces
+C = VectorSplineSpaceConstraints(V)
+clamped_constraint!(C, :top)
+```
+This is equivalent to setting `left_constraint!` with the arguments `(c=[1], dim=2)` in
+each dimension of the vector space. It is also possible to clamp multiple edges
+in a subset of dimensions,
+```@repl specialspaces
+C = VectorSplineSpaceConstraints{3}()
+clamped_constraint!(C, :left, :right, :bottom, :top, :back, :front; dim=[1,3])
+```
+In this case, the scalar spline spaces in dimensions 1 and 3 are clamped on the whole
+boundary of the domain. No constraints are applied in dimension 2.
+
+Clamping for scalar spline spaces works the same way. Valid boundary labels are:
+`:left`, `:right`, `:bottom`, `:top`, `:back`, `:front`, where the last two are only
+valid in three dimensions.
+
+!!! tip "Numbering and labeling boundaries on Cartesian grids"
+
+    SuiteSplines follows a simple convention for numbering boundaries of Cartesian
+    product domains: boundaries are numbered dimension by dimension by assigning
+    ever increasing integers first to the beginning then to the end of the interval
+    in a particular dimension. The labels `:left → :right`, `:bottom → :top`, `:back → :front`
+    are directed always in the direction of the axes. See
+    [`boundary_number`](@ref SpecialSpaces.boundary_number) for more details.
+
+    
+
 ### Extraction operators
 
 To obtain the Kronecker product extraction operator of a scalar spline space use
@@ -332,3 +376,12 @@ extraction_operators(V; sparse=true)
 ```
 
 Note, that the extraction operator is *not* stored in the constraints containers!
+
+
+## API
+```@autodocs
+Modules = [
+    SuiteSplines.SpecialSpaces,
+]
+Order   = [:function, :type, :macro, :constant]
+```

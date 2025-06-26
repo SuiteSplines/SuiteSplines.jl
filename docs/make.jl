@@ -16,7 +16,9 @@ makedocs(;
     ),
     pages=[
         "About" => "index.md",
-        "SpecialSpaces.jl" => "SpecialSpaces.md",
+        "Tutorials" => [
+            "tutorials/SpecialSpaces.md",
+        ],
         "Index" => "api.md",
     ],
 )
